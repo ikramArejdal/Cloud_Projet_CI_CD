@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="bg-canvas" aria-hidden="true">
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-noise"></div>
+  </div>
+
+  <!-- ════════════════════════════════════ -->
+  <!-- PAGE AUTH                           -->
+  <!-- ════════════════════════════════════ -->
+  <div id="auth-page" class="page active">
+    <div class="auth-wrapper">
+
+      <button class="theme-btn" onclick="toggleTheme()" id="theme-toggle-auth" title="Changer le thème">
+        <svg class="icon icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        <svg class="icon icon-sun hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+
+      <div class="auth-card glass">
+        <div class="auth-brand">
+          <div class="brand-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <h1 class="brand-name">TaskFlow</h1>
+          <p class="brand-tagline">Productivité sans friction</p>
+        </div>
+
+        <div class="tabs">
+          <button class="tab-btn active" onclick="switchTab('login', event)">Connexion</button>
+          <button class="tab-btn"        onclick="switchTab('register', event)">Inscription</button>
+        </div>
+
+        <form id="login-form" class="auth-form">
+          <div class="field">
+            <label for="login-username">Nom d'utilisateur</label>
+            <div class="input-wrap">
+              <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+              <input type="text" id="login-username" placeholder="votre_nom" required autocomplete="username">
+            </div>
+          </div>
+          <div class="field">
+            <label for="login-password">Mot de passe</label>
+            <div class="input-wrap">
+              <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <span class="btn-text">Se connecter</span>
+            <span class="btn-loader hidden">
+              <svg class="spin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+            </span>
+          </button>
+        </form>
+
+        <form id="register-form" class="auth-form hidden">
+          <div class="field">
+            <label for="reg-username">Nom d'utilisateur</label>
+            <div class="input-wrap">
+              <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+              <input type="text" id="reg-username" placeholder="choisissez_un_nom" required minlength="3" autocomplete="username">
+            </div>
+          </div>
+          <div class="field">
+            <label for="reg-password">Mot de passe</label>
+            <div class="input-wrap">
+              <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input type="password" id="reg-password" placeholder="min. 4 caractères" required minlength="4" autocomplete="new-password">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <span class="btn-text">Créer un compte</span>
+            <span class="btn-loader hidden">
+              <svg class="spin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+            </span>
+          </button>
+        </form>
+
+        <div id="auth-message" class="message hidden"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════ -->
+  <!-- PAGE APP                            -->
+  <!-- ════════════════════════════════════ -->
+  <div id="app-page" class="page">
+    <div class="app-shell">
+
+      <!-- Sidebar -->
+      <aside class="sidebar glass">
+        <div class="sidebar-top">
+          <div class="sidebar-brand">
+            <div class="brand-logo small">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <span class="brand-name small">TaskFlow</span>
+          </div>
+
+          <nav class="sidebar-nav">
+            <p class="nav-label">Vues</p>
+            <button class="nav-item active" onclick="filterTasks('all', event)">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              Toutes
+              <span class="nav-count" id="badge-all">0</span>
+            </button>
+            <button class="nav-item" onclick="filterTasks('active', event)">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              En cours
+              <span class="nav-count accent" id="badge-active">0</span>
+            </button>
+            <button class="nav-item" onclick="filterTasks('completed', event)">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Terminées
+              <span class="nav-count success" id="badge-done">0</span>
+            </button>
+          </nav>
+        </div>
+
+        <div class="sidebar-bottom">
+          <div class="progress-card">
+            <div class="progress-header">
+              <span>Progression</span>
+              <span class="progress-pct" id="progress-label">0%</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="progress-bar"></div>
+            </div>
+          </div>
+
+          <div class="user-row">
+            <div class="user-avatar" id="user-avatar">U</div>
+            <span class="user-name" id="user-name">Utilisateur</span>
+            <div class="user-actions">
+              <button class="icon-btn" onclick="toggleTheme()" id="theme-toggle" title="Thème">
+                <svg class="icon icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                <svg class="icon icon-sun hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+              </button>
+              <button class="icon-btn danger" onclick="logout()" title="Déconnexion">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <main class="main-content">
+        <header class="main-header">
+          <div>
+            <h2 class="main-title">Tableau de bord</h2>
+            <p class="main-date" id="current-date"></p>
+          </div>
+        </header>
+
+        <!-- Stats -->
+        <div class="stats-row">
+          <div class="stat-card glass">
+            <div class="stat-icon-wrap neutral">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="stat-total">0</span>
+              <span class="stat-lbl">Tâches totales</span>
+            </div>
+          </div>
+          <div class="stat-card glass">
+            <div class="stat-icon-wrap accent">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value accent" id="stat-active">0</span>
+              <span class="stat-lbl">En cours</span>
+            </div>
+          </div>
+          <div class="stat-card glass">
+            <div class="stat-icon-wrap success">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value success" id="stat-completed">0</span>
+              <span class="stat-lbl">Terminées</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ajout tâche -->
+        <div class="add-task-card glass">
+          <div class="add-task-row">
+            <svg class="add-task-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            <input type="text" id="new-task-input" placeholder="Ajouter une tâche — Entrée pour valider" maxlength="100">
+            <button onclick="addTask()" class="btn btn-primary btn-add">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Ajouter
+            </button>
+          </div>
+          <div class="priority-row">
+            <span class="priority-row-label">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+              Priorité
+            </span>
+            <div class="priority-btns">
+              <button class="prio-btn prio-low" data-priority="low" onclick="selectPriority('low')">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                Basse
+              </button>
+              <button class="prio-btn prio-medium active" data-priority="medium" onclick="selectPriority('medium')">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Normale
+              </button>
+              <button class="prio-btn prio-high" data-priority="high" onclick="selectPriority('high')">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+                Haute
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Liste -->
+        <div class="tasks-card glass">
+          <div class="tasks-toolbar">
+            <h3 class="tasks-title">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+              Liste des tâches
+            </h3>
+          </div>
+          <ul id="task-list" class="task-list">
+            <li class="task-empty">
+              <div class="empty-graphic">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>
+              </div>
+              <p class="empty-title">Aucune tâche</p>
+              <p class="empty-sub">Ajoutez votre première tâche ci-dessus.</p>
+            </li>
+          </ul>
+        </div>
+
+        <footer class="main-footer">
+          <span>TaskFlow</span>
+          <span class="sep">·</span>
+          <span>CI/CD Pipeline</span>
+          <span class="sep">·</span>
+          <span>Render Cloud</span>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const el = document.getElementById('current-date');
+      if (el) el.textContent = new Date().toLocaleDateString('fr-FR', {
+        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+      });
+    });
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
