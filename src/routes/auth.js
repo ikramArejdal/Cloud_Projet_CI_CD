@@ -14,8 +14,8 @@ router.post('/register', async (req, res, next) => {
     if (!username || !password) {
       return res.status(400).json({ success: false, error: 'username et password sont requis' });
     }
-    if (username.length < 3) {
-      return res.status(400).json({ success: false, error: "Le nom d'utilisateur doit faire au moins 3 caractères" });
+    if (username.length < 10) {
+      return res.status(400).json({ success: false, error: "Le nom d'utilisateur doit faire au moins 10 caractères" });
     }
     if (password.length < 4) {
       return res.status(400).json({ success: false, error: 'Le mot de passe doit faire au moins 4 caractères' });
