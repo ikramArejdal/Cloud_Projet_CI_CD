@@ -29,12 +29,12 @@ describe('POST /api/auth/register', () => {
   it('crée un compte avec des données valides', async () => {
     const res = await request(app)
       .post('/api/auth/register')
-      .send({ username: 'testuser_ci', password: 'pass1234' });
+      .send({ username: 'testuser_expert', password: 'pass1234' });
 
     expect(res.statusCode).toBe(201);
     expect(res.body.success).toBe(true);
     expect(res.body.token).toBeDefined();
-    expect(res.body.user.username).toBe('testuser_ci');
+    expect(res.body.user.username).toBe('testuser_expert');
     expect(res.body.user.password).toBeUndefined();
   });
 
@@ -85,24 +85,24 @@ describe('POST /api/auth/login', () => {
   beforeAll(async () => {
     await request(app)
       .post('/api/auth/register')
-      .send({ username: 'loginuser', password: 'monmotdepasse' });
+      .send({ username: 'loginuser_2025', password: 'monmotdepasse' });
   });
 
   it('connecte un utilisateur avec des identifiants valides', async () => {
     const res = await request(app)
       .post('/api/auth/login')
-      .send({ username: 'loginuser', password: 'monmotdepasse' });
+      .send({ username: 'loginuser_2025', password: 'monmotdepasse' });
 
     expect(res.statusCode).toBe(200);
     expect(res.body.success).toBe(true);
     expect(res.body.token).toBeDefined();
-    expect(res.body.user.username).toBe('loginuser');
+    expect(res.body.user.username).toBe('loginuser_2025');
   });
 
   it('refuse un mauvais mot de passe', async () => {
     const res = await request(app)
       .post('/api/auth/login')
-      .send({ username: 'loginuser', password: 'mauvaismdp' });
+      .send({ username: 'loginuser_2025', password: 'mauvaismdp' });
 
     expect(res.statusCode).toBe(401);
     expect(res.body.success).toBe(false);
@@ -137,7 +137,7 @@ describe('API Tâches', () => {
   beforeAll(async () => {
     const res = await request(app)
       .post('/api/auth/register')
-      .send({ username: 'taskuser_ci', password: 'pass1234' });
+      .send({ username: 'taskuser_expert', password: 'pass1234' });
     token = res.body.token;
   });
 
