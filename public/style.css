@@ -478,10 +478,41 @@ body {
   animation: fadeIn 0.3s ease;
 }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+/* ════════════════════════════════════════════
+   MODIFICATION POUR LA DÉMO CI/CD
+   ════════════════════════════════════════════ */
 
-.main-header { margin-bottom: 4px; }
-.main-title  { font-size: 22px; font-weight: 600; letter-spacing: -0.4px; }
-.main-date   { font-size: 13px; color: var(--t3); margin-top: 3px; text-transform: capitalize; }
+.main-header {
+  margin-bottom: 40px;  
+  text-align: center;    
+  width: 100%;
+  padding-top: 20px;
+}
+
+.main-title {
+  font-size: 32px;     
+  font-weight: 800;      
+  letter-spacing: -1.5px;
+  margin-bottom: 8px;
+  background: linear-gradient(90deg, var(--accent), var(--success));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  
+  animation: titleGlow 1s ease-out;
+}
+
+@keyframes titleGlow {
+  from { opacity: 0; transform: translateY(-10px); filter: blur(5px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+.main-date {
+  font-size: 15px;
+  color: var(--t2);
+  font-weight: 500;
+  opacity: 0.8;
+}
 
 /* Stats */
 .stats-row {

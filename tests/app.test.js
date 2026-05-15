@@ -29,13 +29,13 @@ describe('POST /api/auth/register', () => {
   it('crée un compte avec des données valides', async () => {
     const res = await request(app)
       .post('/api/auth/register')
-      .send({ username: 'testuser', password: 'pass1234' });
+      .send({ username: 'testuser_ci', password: 'pass1234' });
 
     expect(res.statusCode).toBe(201);
     expect(res.body.success).toBe(true);
     expect(res.body.token).toBeDefined();
-    expect(res.body.user.username).toBe('testuser');
-    expect(res.body.user.password).toBeUndefined(); // mot de passe jamais exposé
+    expect(res.body.user.username).toBe('testuser_ci');
+    expect(res.body.user.password).toBeUndefined();
   });
 
   it('refuse un username trop court (< 10 chars)', async () => {
